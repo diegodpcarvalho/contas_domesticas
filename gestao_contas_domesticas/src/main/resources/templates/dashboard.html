@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Gerenciamento de Contas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="container mt-5">
+  <h1 class="text-center">Dashboard de Contas</h1>
+
+  <!-- Formulário para cadastrar contas -->
+  <h2 class="mt-5">Cadastrar Nova Conta</h2>
+  <form id="form-contas" class="mb-5">
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="descricao" class="form-label">Descrição</label>
+        <input type="text" class="form-control" id="descricao" required>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="valor" class="form-label">Valor</label>
+        <input type="number" class="form-control" id="valor" required>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="dataVencimento" class="form-label">Data de Vencimento/Recebimento</label>
+        <input type="date" class="form-control" id="dataVencimento" required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="categoria" class="form-label">Categoria</label>
+        <select class="form-control" id="categoria" required>
+          <option value="Moradia">Moradia</option>
+          <option value="Alimentação">Alimentação</option>
+          <option value="Transporte">Transporte</option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select class="form-control" id="status" required>
+          <option value="Pendente">Pendente</option>
+          <option value="Pago">Pago</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Adicionar Conta</button>
+  </form>
+
+  <!-- Tabelas para exibir contas a pagar e a receber -->
+  <h2>Contas a Pagar</h2>
+  <table class="table table-striped" id="contasPagarTable">
+    <thead>
+    <tr>
+      <th>Descrição</th>
+      <th>Valor</th>
+      <th>Data de Vencimento</th>
+      <th>Categoria</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- As contas a pagar serão exibidas aqui -->
+    </tbody>
+  </table>
+
+  <!-- Formulário para cadastrar contas a receber -->
+  <h2 class="mt-5">Cadastrar Nova Conta a Receber</h2>
+  <form id="form-contas-receber" class="mb-5">
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="descricaoReceber" class="form-label">Descrição</label>
+        <input type="text" class="form-control" id="descricaoReceber" required>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="valorReceber" class="form-label">Valor</label>
+        <input type="number" class="form-control" id="valorReceber" required>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="dataRecebimento" class="form-label">Data de Recebimento</label>
+        <input type="date" class="form-control" id="dataRecebimento" required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="categoriaReceber" class="form-label">Categoria</label>
+        <select class="form-control" id="categoriaReceber" required>
+          <option value="Salário">Salário</option>
+          <option value="Investimento">Investimento</option>
+          <option value="Freelance">Freelance</option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="statusReceber" class="form-label">Status</label>
+        <select class="form-control" id="statusReceber" required>
+          <option value="Pendente">Pendente</option>
+          <option value="Recebido">Recebido</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Adicionar Conta a Receber</button>
+  </form>
+
+  <h2>Contas a Receber</h2>
+  <table class="table table-striped" id="contasReceberTable">
+    <thead>
+    <tr>
+      <th>Descrição</th>
+      <th>Valor</th>
+      <th>Data de Recebimento</th>
+      <th>Categoria</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- As contas a receber serão exibidas aqui -->
+    </tbody>
+  </table>
+
+  <!-- Módulo de Cartão de Crédito -->
+  <h2 class="mt-5">Compras com Cartão de Crédito</h2>
+  <form id="form-compras-cartao" class="mb-5">
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="descricaoCartao" class="form-label">Descrição</label>
+        <input type="text" class="form-control" id="descricaoCartao" required>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="valorCartao" class="form-label">Valor</label>
+        <input type="number" class="form-control" id="valorCartao" required>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="dataCompra" class="form-label">Data da Compra</label>
+        <input type="date" class="form-control" id="dataCompra" required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="categoriaCartao" class="form-label">Categoria</label>
+        <select class="form-control" id="categoriaCartao" required>
+          <option value="Alimentação">Alimentação</option>
+          <option value="Transporte">Transporte</option>
+          <option value="Lazer">Lazer</option>
+        </select>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="cartao" class="form-label">Cartão Utilizado</label>
+        <select class="form-control" id="cartao" required>
+          <option value="Visa">Visa</option>
+          <option value="Mastercard">Mastercard</option>
+          <option value="Amex">Amex</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="parcelas" class="form-label">Número de Parcelas</label>
+        <input type="number" class="form-control" id="parcelas" value="1" min="1" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="limiteDisponivel" class="form-label">Limite Disponível (R$)</label>
+        <input type="number" class="form-control" id="limiteDisponivel" readonly>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Adicionar Compra</button>
+  </form>
+
+  <h3>Compras com Cartão de Crédito</h3>
+  <table class="table table-striped" id="comprasCartaoTable">
+    <thead>
+    <tr>
+      <th>Descrição</th>
+      <th>Valor</th>
+      <th>Data da Compra</th>
+      <th>Categoria</th>
+      <th>Cartão</th>
+      <th>Parcelas</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- As compras com cartão de crédito serão exibidas aqui -->
+    </tbody>
+  </table>
+
+  <h3>Resumo dos Cartões</h3>
+  <table class="table table-striped" id="resumoCartoesTable">
+    <thead>
+    <tr>
+      <th>Cartão</th>
+      <th>Limite Total</th>
+      <th>Limite Disponível</th>
+      <th>Total de Compras em Aberto</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- O resumo dos cartões será exibido aqui -->
+    </tbody>
+  </table>
+</div>
+
+<script>
+  // Aqui estão as configurações das chamadas para o back-end (API)
+
+  // Adicionar uma nova conta a pagar ou receber
+  // Função para adicionar uma nova conta
+  document.getElementById('form-contas').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const descricao = document.getElementById('descricao').value;
+    const valor = document.getElementById('valor').value;
+    const dataVencimento = document.getElementById('dataVencimento').value;
+    const categoria = document.getElementById('categoria').value;
+    const status = document.getElementById('status').value;
+
+    // Verificar se o valor é maior que zero
+    if (valor <= 0) {
+      alert('O valor deve ser maior que zero.');
+      return;
+    }
+
+    // Pegar o ID do usuário logado do localStorage
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      alert('Usuário não autenticado. Por favor, faça o login.');
+      window.location.href = '/login.html';
+      return;
+    }
+
+    // Criar o objeto conta com o ID do usuário
+    const novaConta = {
+      usuario: {
+        id: userId
+      },
+      descricao: descricao,
+      valor: parseFloat(valor),
+      dataVencimento: dataVencimento,
+      categoria: categoria,
+      status: status
+    };
+
+    // Enviar a conta para o back-end
+    fetch('/contas-pagar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(novaConta)
+    })
+            .then(response => {
+              if (response.ok) {
+                alert('Conta adicionada com sucesso!');
+                atualizarContas();
+                document.getElementById('form-contas').reset();
+              } else {
+                alert('Erro ao adicionar conta');
+              }
+            })
+            .catch(error => console.error('Erro:', error));
+  });
+
+  // Atualizar as contas ao carregar a página
+  window.onload = atualizarContas;;
+
+  // Adicionar uma nova compra com cartão de crédito
+  document.getElementById('form-compras-cartao').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const descricao = document.getElementById('descricaoCartao').value;
+    const valor = parseFloat(document.getElementById('valorCartao').value);
+    const dataCompra = document.getElementById('dataCompra').value;
+    const categoria = document.getElementById('categoriaCartao').value;
+    const cartao = document.getElementById('cartao').value;
+    const parcelas = parseInt(document.getElementById('parcelas').value);
+
+    // Pegar o ID do usuário logado do localStorage
+    const userId = localStorage.getItem('userId');
+
+    if (!userId) {
+      alert('Usuário não autenticado. Por favor, faça o login.');
+      window.location.href = '/login.html';
+      return;
+    }
+
+    // Criar o objeto da nova compra com o ID do usuário
+    const novaCompra = {
+      usuario: {
+        id: userId  // Inclui o ID do usuário
+      },
+      descricao: descricao,
+      valor: valor,
+      dataCompra: dataCompra,
+      categoria: categoria,
+      cartaoUtilizado: cartao,
+      parcelas: parcelas
+    };
+
+    // Enviar a compra para o back-end
+    fetch('/compras-cartao', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(novaCompra)
+    })
+            .then(response => {
+              if (response.ok) {
+                alert('Compra adicionada com sucesso!');
+                atualizarComprasCartao();  // Atualiza a tabela de compras
+                document.getElementById('form-compras-cartao').reset();  // Reseta o formulário
+              } else {
+                alert('Erro ao adicionar compra');
+              }
+            })
+            .catch(error => console.error('Erro:', error));
+  });
+
+
+  // Atualizar as tabelas de contas e compras
+  function atualizarContas() {
+    // Atualizar as contas a pagar
+    let aux = '/contas-pagar/' + localStorage.getItem('userId')
+    fetch(aux).then(response => response.json()).then(data => {
+      const tbodyPagar = document.querySelector('#contasPagarTable tbody');
+      tbodyPagar.innerHTML = '';
+      data.forEach(conta => {
+        tbodyPagar.innerHTML += `
+                <tr>
+                    <td>${conta.descricao}</td>
+                    <td>R$ ${conta.valor.toFixed(2)}</td>
+                    <td>${conta.dataVencimento}</td>
+                    <td>${conta.categoria}</td>
+                    <td>${conta.status}</td>
+                    <td>
+                        ${conta.status === 'Pendente'
+                ? `<button class="btn btn-success" onclick="marcarComoPago(${conta.id})">Pago</button>`
+                : ''}
+                    </td>
+                </tr>
+            `;
+      });
+    });
+
+    // Atualizar as contas a receber
+    let aux2 = '/contas-receber/' + localStorage.getItem('userId')
+    fetch(aux2).then(response => response.json()).then(data => {
+      const tbodyReceber = document.querySelector('#contasReceberTable tbody');
+      tbodyReceber.innerHTML = '';
+      data.forEach(conta => {
+        tbodyReceber.innerHTML += `
+                <tr>
+                    <td>${conta.descricao}</td>
+                    <td>R$ ${conta.valor.toFixed(2)}</td>
+                    <td>${conta.dataRecebimento}</td>
+                    <td>${conta.categoria}</td>
+                    <td>${conta.status}</td>
+                    <td>
+                        ${conta.status === 'Pendente'
+                ? `<button class="btn btn-success" onclick="marcarComoRecebido(${conta.id})">Recebido</button>`
+                : ''}
+                    </td>
+                </tr>
+            `;
+      });
+    });
+  }
+
+  // Adicionar uma nova conta a receber
+  document.getElementById('form-contas-receber').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const descricao = document.getElementById('descricaoReceber').value;
+    const valor = document.getElementById('valorReceber').value;
+    const dataRecebimento = document.getElementById('dataRecebimento').value;
+    const categoria = document.getElementById('categoriaReceber').value;
+    const status = document.getElementById('statusReceber').value;
+
+    // Verificar se o valor é maior que zero
+    if (valor <= 0) {
+      alert('O valor da conta a receber deve ser maior que zero.');
+      return;
+    }
+
+    // Pegar o ID do usuário logado do localStorage
+    const userId = localStorage.getItem('userId');
+
+    if (!userId) {
+      alert('Usuário não autenticado. Por favor, faça o login.');
+      window.location.href = '/login.html';
+      return;
+    }
+
+    // Criar o objeto conta a receber com o ID do usuário
+    const novaContaReceber = {
+      usuario: {
+        id: userId
+      },
+      descricao: descricao,
+      valor: parseFloat(valor),
+      dataRecebimento: dataRecebimento,
+      categoria: categoria,
+      status: status
+    };
+
+    // Enviar a conta a receber para o back-end
+    fetch('/contas-receber', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(novaContaReceber)
+    })
+            .then(response => {
+              if (response.ok) {
+                alert('Conta a receber adicionada com sucesso!');
+                atualizarContas();
+                document.getElementById('form-contas-receber').reset();
+              } else {
+                alert('Erro ao adicionar conta a receber');
+              }
+            })
+            .catch(error => console.error('Erro:', error));
+  });
+
+
+
+
+  // Atualizar as tabelas de compras e resumo dos cartões
+  function atualizarComprasCartao() {
+    let aux3 = '/compras-cartao/' + localStorage.getItem('userId')
+    fetch(aux3).then(response => response.json()).then(data => {
+      const tbodyComprasCartao = document.querySelector('#comprasCartaoTable tbody');
+      tbodyComprasCartao.innerHTML = '';
+      data.forEach(compra => {
+        tbodyComprasCartao.innerHTML += `
+                    <tr>
+                        <td>${compra.descricao}</td>
+                        <td>R$ ${compra.valor.toFixed(2)}</td>
+                        <td>${compra.dataCompra}</td>
+                        <td>${compra.categoria}</td>
+                        <td>${compra.cartaoUtilizado}</td>
+                        <td>${compra.parcelas}</td>
+                    </tr>
+                `;
+      });
+    });
+
+    fetch('/resumo-cartoes').then(response => response.json()).then(data => {
+      const tbodyResumoCartoes = document.querySelector('#resumoCartoesTable tbody');
+      tbodyResumoCartoes.innerHTML = '';
+      data.forEach(cartao => {
+        tbodyResumoCartoes.innerHTML += `
+                    <tr>
+                        <td>${cartao.cartao}</td>
+                        <td>R$ ${cartao.limiteTotal.toFixed(2)}</td>
+                        <td>R$ ${cartao.limiteDisponivel.toFixed(2)}</td>
+                        <td>R$ ${cartao.totalComprasAbertas.toFixed(2)}</td>
+                    </tr>
+                `;
+      });
+    });
+  }
+
+  function marcarComoPago(contaId) {
+    fetch(`/contas-pagar/${contaId}/pago`, {
+      method: 'PUT'
+    })
+            .then(response => {
+              if (response.ok) {
+                alert('Conta marcada como paga!');
+                atualizarContas();  // Atualiza a lista de contas após marcar como paga
+              } else {
+                alert('Erro ao marcar como paga.');
+              }
+            })
+            .catch(error => console.error('Erro:', error));
+  }
+
+  function marcarComoRecebido(contaId) {
+    fetch(`/contas-receber/${contaId}/recebido`, {
+      method: 'PUT'
+    })
+            .then(response => {
+              if (response.ok) {
+                alert('Conta marcada como recebida!');
+                atualizarContas();  // Atualiza a lista de contas após marcar como recebida
+              } else {
+                alert('Erro ao marcar como recebida.');
+              }
+            })
+            .catch(error => console.error('Erro:', error));
+  }
+
+
+  // Atualizar tudo ao carregar a página
+  window.onload = function() {
+    atualizarContas();
+    atualizarComprasCartao();
+  };
+</script>
+
+</body>
+</html>
+
